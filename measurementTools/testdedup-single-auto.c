@@ -135,6 +135,11 @@ int main(int argc, char **argv) {
 				memcpy((void*)filemem, (void*)srcPnt, bufsize);
 				// get end time
 				clock_gettime(CLOCK_MONOTONIC, &endtime);
+
+				memset(tmp, 0, bufsize+offset);
+				free(tmp);
+				tmp = NULL;
+
 			} else {
 				/* Move the pointer to the specified offset. */
 				if(fseek(fp2, offset, SEEK_SET) != 0) { 
@@ -156,16 +161,17 @@ int main(int argc, char **argv) {
 		// Calculate and display time needed for writing to memory
 		uint64_t timeNeeded = ((endtime.tv_sec * 1000000000) + endtime.tv_nsec) - ((starttime.tv_sec * 1000000000) + starttime.tv_nsec);
 
-		printf("Time: %i ns\n", timeNeeded);
-
+		#define OUTPUT_FORMAT "%u  filename=%s  filename2=%s  interval=%u  cache=%i\n", timeNeeded, filename, filename2, interval, cache
+		printf(OUTPUT_FORMAT);
 		FILE *lfp = fopen(logfilename, "a");
-		fprintf(lfp, "%u\n", timeNeeded);
+		fprintf(lfp, OUTPUT_FORMAT);
 		fclose(lfp);
 
 		// Overwrite source with zeroes to make sure that the data 
 		// does not come to haunt us later...
 		memset(filemem, 0, bufsize);
 		free(filemem);
+		filemem = NULL;
 
 		return 0;
 	} else {

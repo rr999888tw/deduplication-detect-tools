@@ -57,6 +57,7 @@ int main(int argc, char **argv) {
 			}
 		}
 		fclose(fp);
+		getchar();
 		// printf("filemem size = %d\n", strlen(filemem) );
 		memset(filemem, 0, strlen(filemem)); // Overwrite file memory
 		free(filemem);
