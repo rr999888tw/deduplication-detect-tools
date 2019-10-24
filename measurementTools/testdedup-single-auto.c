@@ -161,7 +161,7 @@ int main(int argc, char **argv) {
 		// Calculate and display time needed for writing to memory
 		uint64_t timeNeeded = ((endtime.tv_sec * 1000000000) + endtime.tv_nsec) - ((starttime.tv_sec * 1000000000) + starttime.tv_nsec);
 
-		#define OUTPUT_FORMAT "%u  filename=%s  filename2=%s  interval=%u  cache=%i\n", timeNeeded, filename, filename2, interval, cache
+		#define OUTPUT_FORMAT "timeNeeded=%u  filename=%s  filename2=%s  interval=%u  cache=%i  fileSize=%u\n", timeNeeded, filename, filename2, interval, cache, bufsize
 		printf(OUTPUT_FORMAT);
 		FILE *lfp = fopen(logfilename, "a");
 		fprintf(lfp, OUTPUT_FORMAT);

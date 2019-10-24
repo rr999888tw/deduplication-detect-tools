@@ -1,6 +1,7 @@
 import subprocess
 import random
 import time
+import numpy as np
 from os import listdir
 from os.path import isfile, join
 
@@ -35,6 +36,15 @@ def randPick2(arr):
         ret2 = random.choice(arr)
     return (ret1, ret2)
     
+def gen_exponential_rand(B):
+    return np.random.exponential(B)
+
+def gen_normal_rand(mean, dev):
+    print (np.random.normal(mean, dev))
+    return 
+
+def gen_poisson_rand(seed):
+    return (np.random.poisson(seed))
 
 if __name__ == '__main__':
     
@@ -49,12 +59,14 @@ if __name__ == '__main__':
     cmd_intervalRange = range(1, 10, 1)
     exp_time = 100 # experiment time
 
+    
 
 
     start = time.time()
     while True:
         filename, filename2 = randPick2(files)
         interval = random.choice(intervalRange)
+
         print ("interval = " + str(interval))
         generate_a_log(binary, filename, filename2, logfilename=logfilename, interval=interval, cache=cache)
         end = time.time()
