@@ -1,23 +1,16 @@
-import re
+import threading
+import time
 
-ent = "timeNeeded=2019666  filename=dat/data-16mb-19.dat  filename2=dat/data-16mb-62.dat  interval=9  cache=1"
+def thread_function(name):
+    print(name)
+    time.sleep(2)
 
-for ele in ent.strip().split("  "):
-    if '=' in ele:
-        tmp = ele.split('=')
-        print(tmp)
+if __name__ == "__main__":
 
-# print(m.group(0))
-# import numpy as np
+    x = threading.Thread(target=thread_function, args=("haha",))
+    y = threading.Thread(target=thread_function, args=("han",))
+    x.start()
+    y.start()
 
-# def gen_exponential_rand(B):
-#     return np.random.exponential(B)
-
-# def gen_normal_rand(mean, dev):
-#     return (np.random.normal(mean, dev))
-    
-# def gen_poisson_rand(seed):
-#     return (np.random.poisson(seed))
-
-# while (True):
-#     print ( gen_poisson_rand(10))
+    x.join()
+    y.join()

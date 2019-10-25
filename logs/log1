@@ -38,3 +38,6 @@
 1770530  filename=dat/data-16mb-47.dat  filename2=dat/data-16mb-27.dat  interval=7  cache=1
 2809970  filename=dat/data-16mb-67.dat  filename2=dat/data-16mb-38.dat  interval=6  cache=1
 2019666  filename=dat/data-16mb-19.dat  filename2=dat/data-16mb-62.dat  interval=9  cache=1
+timeNeeded=37083643  filename=dat/data-16mb-39.dat  filename2=dat/data-16mb-48.dat  interval=7  cache=0  fileSize=16777216
+timeNeeded=2011801  filename=dat/data-16mb-31.dat  filename2=dat/data-16mb-22.dat  interval=27  cache=1  fileSize=16777216
+timeNeeded=1742622  filename=dat/data-16mb-14.dat  filename2=dat/data-16mb-62.dat  interval=35  cache=1  fileSize=16777216
