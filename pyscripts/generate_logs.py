@@ -66,7 +66,7 @@ if __name__ == '__main__':
     while True:
         filename, filename2 = randPick2(files)
         interval = random.choice(intervalRange)
-
+        cache = random.choice([True, False])
         print ("interval = " + str(interval))
         generate_a_log(binary, filename, filename2, logfilename=logfilename, interval=interval, cache=cache)
         end = time.time()
