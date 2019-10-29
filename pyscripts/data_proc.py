@@ -1,25 +1,37 @@
+import matplotlib.pyplot as plt
+import statistics
+
 class Entry:
     
-    def __init__(self, timeNeeded, fileSize, isDedup, interval, cache,):
+    def __init__(self, timeNeeded, fileSize, isDedup, interval, cache,  **kwargs):
         self._timeNeeded = timeNeeded
         self._fileSize = fileSize
-        self._isDedup = isDedup
+        self._isDedup = bool(isDedup)
         self._interval = interval
-        self._cache = cache
+        self._cache = bool(cache)
         # self.r = realpart
         # self.i = imagpart
         return
+
+    def attribute(self):
+        return self.__dict__
 
     def isDedup(self):
         return (self._isDedup)
     
     def isCache(self):
         return (self._cache)
+    
+    def get_timeNeeded(self):
+        return self._timeNeeded
+    
+    def get_interval(self):
+        return self._interval
 
 def parseEntry(entryStr):
 
     args = dict()
-    for ele in ent.strip().split("  "):
+    for ele in entryStr.strip().split("  "):
 
         if '=' in ele:
             tmp = ele.split('=')
@@ -30,14 +42,36 @@ def parseEntry(entryStr):
 
         else:
             args['timeNeeded'] = float(ele)
+    return (args)
 
-    # print(args)
-    return Entry(**args)
+
+def read_logfile(logfile, cache, isDedup, thresh):
+
+    f = open(logfile).read()
+    arr = f.strip().split('\n')
     
-    # return Entry()
+    dataArr = []
+    for ele in arr:
+        argDic = parseEntry(ele)
+        entry = Entry(**argDic, isDedup=isDedup)
+        if entry.isCache() == cache and entry.get_interval() < thresh:
+            dataArr.append(entry)
+    
+    x = list (map(lambda entry: entry.get_interval(), dataArr) )
+    y = list (map(lambda entry: entry.get_timeNeeded(), dataArr))
+    return (x, y)
 
-ent = "timeNeeded=2019666.44  filename=dat/data-16mb-19.dat  filename2=dat/data-16mb-62.dat  interval=9  cache=1"
-print(parseEntry(ent))
+# 'logs/log-without-dedup-2'
+# 'logs/logs-with-dedup-1'
+# 'logs/logs-without-dedup-3'
+# cache = True
 
-# log_Without_dedup = open("logs/log1", "r").read().strip()
-# print((log_Without_dedup.split("\n")))
+x1, y1 = read_logfile('logs/logs-without-dedup-3', cache=False, isDedup=False, thresh=20)
+x2, y2 = read_logfile('logs/log-without-dedup-2', cache=False, isDedup=False, thresh=20)
+# x1, y1 = read_logfile('logs/log-without-dedup-2', True, False)
+
+print (statistics.mean(y1))
+print (statistics.mean(y2))
+
+plt.plot(x1, y1, 'bo', x2, y2, 'ro')
+plt.show()
