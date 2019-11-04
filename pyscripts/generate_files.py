@@ -14,4 +14,4 @@ def generate_big_random_bin_file(filename,size):
 
 if __name__ == '__main__':
     for i in range(100):
-        generate_big_random_bin_file("dat/data-16mb-" + str(i) + ".dat",1024*1024*16)
+        generate_big_random_bin_file("dat-own/data-32mb-" + str(i) + ".dat-own",1024*1024*32)
