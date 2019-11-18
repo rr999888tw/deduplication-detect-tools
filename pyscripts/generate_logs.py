@@ -3,6 +3,7 @@ import random
 import time
 import numpy as np
 import threading
+import sys
 
 from os import listdir
 from os.path import isfile, join
@@ -49,9 +50,9 @@ def gen_poisson_rand(seed):
 
 if __name__ == '__main__':
     
-    datdir = 'dat'
+    datdir = sys.argv[1]
     files = get_files(datdir)
-    logfilename = "logs/log1"
+    logfilename = sys.argv[2]
     interval = 5
     cache = True
     binary = "testdedup-single-auto"
