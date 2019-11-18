@@ -1,5 +1,6 @@
 import subprocess
 import os
+import sys
 from os import listdir
 from os.path import isfile, join
 
@@ -9,7 +10,7 @@ def get_files(datdir):
     onlyfiles.sort()
     return onlyfiles
 
-datdir = 'dat'
+datdir = sys.argv[1]
 files = get_files(datdir)
 binary = 'loadfile'
 
