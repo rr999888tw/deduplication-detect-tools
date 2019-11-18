@@ -19,7 +19,6 @@ def generate_a_log(binary, filename, filename2, logfilename="logs/log", interval
         return
     else:
         return
-    
 
 def get_files(datdir):
     

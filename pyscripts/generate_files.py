@@ -1,3 +1,6 @@
+import sys
+import os
+
 def generate_big_random_bin_file(filename,size):
     """
     generate big binary file with the specified size in bytes
@@ -13,5 +16,11 @@ def generate_big_random_bin_file(filename,size):
     pass
 
 if __name__ == '__main__':
+    dirname = sys.argv[1]
+    try:
+        os.mkdir(dirname)
+    except:
+        print(dirname + ' creation error \n')
+
     for i in range(100):
-        generate_big_random_bin_file("dat-own/data-32mb-" + str(i) + ".dat-own",1024*1024*32)
+        generate_big_random_bin_file( dirname + "/data-32mb-" + str(i) + ".dat",1024 * 1024 * 32)
