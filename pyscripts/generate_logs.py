@@ -57,8 +57,8 @@ if __name__ == '__main__':
     cache = True
     binary = "testdedup-single-auto"
     cmd_interval = 1
-    intervalRange = range(3, 80, 1)
-    cmd_intervalRange = range(1, 30, 1)
+    intervalRange = range(3, 300, 1)
+    cmd_intervalRange = range(1, 60, 1)
     exp_time = 5*24*60*60 # experiment time
     no_thread = 10
     
