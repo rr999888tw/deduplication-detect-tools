@@ -45,7 +45,7 @@ def parseEntry(entryStr):
     return (args)
 
 
-def read_logfile(logfile, cache, isDedup, thresh):
+def read_logfile(logfile, cache, isDedup, thresh=1000):
 
     f = open(logfile).read()
     arr = f.strip().split('\n')
@@ -66,12 +66,19 @@ def read_logfile(logfile, cache, isDedup, thresh):
 # 'logs/logs-without-dedup-3'
 # cache = True
 
-x1, y1 = read_logfile('logs/logs-without-dedup-3', cache=False, isDedup=False, thresh=20)
-x2, y2 = read_logfile('logs/log-without-dedup-2', cache=False, isDedup=False, thresh=20)
-# x1, y1 = read_logfile('logs/log-without-dedup-2', True, False)
+x4, y4 = read_logfile('vmlogs/vm04', cache=True, isDedup=True)
+x5, y5 = read_logfile('vmlogs/vm05', cache=True, isDedup=True)
+x6, y6 = read_logfile('vmlogs/vm06', cache=True, isDedup=True)
+x7, y7 = read_logfile('vmlogs/vm07', cache=True, isDedup=False)
+x8, y8 = read_logfile('vmlogs/vm08', cache=True, isDedup=False)
+x9, y9 = read_logfile('vmlogs/vm09', cache=True, isDedup=False)
 
-print (statistics.mean(y1))
-print (statistics.mean(y2))
+print (statistics.mean(y4))
+print (statistics.mean(y5))
+print (statistics.mean(y6))
+print (statistics.mean(y7))
+print (statistics.mean(y8))
+print (statistics.mean(y9))
 
-plt.plot(x1, y1, 'bo', x2, y2, 'ro')
-plt.show()
+# plt.plot(x1, y1, 'bo', x2, y2, 'ro')
+# plt.show()
