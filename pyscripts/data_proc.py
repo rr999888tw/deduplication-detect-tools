@@ -62,52 +62,45 @@ def read_logfile(logfile, cache, isDedup, thresh=1000):
     y = list (map(lambda entry: entry.get_timeNeeded(), dataArr))
     return (x, y)
 
-# 'logs/log-without-dedup-2'
-# 'logs/logs-with-dedup-1'
-# 'logs/logs-without-dedup-3'
-# cache = True
+def plot(filename, cache=True, isDedup=True):
+    xi, yi = read_logfile(filename, cache, isDedup)
 
-# x4, y4 = read_logfile('vmlogs/vm04', cache=True, isDedup=True)
-# x5, y5 = read_logfile('vmlogs/vm05', cache=True, isDedup=True)
-# x6, y6 = read_logfile('vmlogs/vm06', cache=True, isDedup=True)
-# x7, y7 = read_logfile('vmlogs/vm07', cache=True, isDedup=False)
-# x8, y8 = read_logfile('vmlogs/vm08', cache=True, isDedup=False)
-# x9, y9 = read_logfile('vmlogs/vm09', cache=True, isDedup=False)
+    x = np.linspace(min(xi), max(xi), 1000)
+    cor = np.corrcoef(xi, yi)[0][1]
+    x0 = statistics.mean(xi)
+    y0 = statistics.mean(yi)
+    sigx = statistics.stdev(xi)
+    sigy = statistics.stdev(yi)
+    m = cor * sigy / sigx
+    b = y0 - m * x0
+    y = [m * ele + b for ele in x]
+    plt.plot(xi, yi, 'ro')
+    plt.plot(x, y, linestyle='solid')
+    # plt.show()
 
-x1, y1 = read_logfile('local-vmlogs/dedup-1', cache=True, isDedup=True)
-x2, y2 = read_logfile('local-vmlogs/dedup-2', cache=True, isDedup=True)
-x3, y3 = read_logfile('local-vmlogs/dedup-3', cache=True, isDedup=True)
-x4, y4 = read_logfile('local-vmlogs/dedup-4', cache=True, isDedup=True)
+plt.figure(1)
+plot('local-vmlogs/dedup-2', True)
 
-x5, y5 = read_logfile('local-vmlogs/no-dedup-1', cache=True, isDedup=False)
-x6, y6 = read_logfile('local-vmlogs/no-dedup-2', cache=True, isDedup=False)
-x7, y7 = read_logfile('local-vmlogs/no-dedup-3', cache=True, isDedup=False)
-x8, y8 = read_logfile('local-vmlogs/no-dedup-4', cache=True, isDedup=False)
+plt.figure(2)
+plot('local-vmlogs/no-dedup-4', True)
 
-print (statistics.mean(y1))
-print (statistics.mean(y2))
-print (statistics.mean(y3))
-print (statistics.mean(y4))
-print (statistics.mean(y5))
-print (statistics.mean(y6))
-print (statistics.mean(y7))
-print (statistics.mean(y8))
+plt.show()
 
-print (np.corrcoef(x1, y1))
-print (np.corrcoef(x2, y2))
-print (np.corrcoef(x3, y3))
-print (np.corrcoef(x4, y4))
-print (np.corrcoef(x5, y5))
-print (np.corrcoef(x6, y6))
-print (np.corrcoef(x7, y7))
-print (np.corrcoef(x8, y8))
+"logs/logs-with-dedup-1"
+"logs/logs-without-dedup-1"
+"logs/logs-without-dedup-2"
+"logs/logs-without-dedup-3"
 
-# print (np.corrcoef(x4, y4))
-# print (np.corrcoef(x5, y5))
-# print (np.corrcoef(x6, y6))
-# print (np.corrcoef(x7, y7))
-# print (np.corrcoef(x8, y8))
-# print (np.corrcoef(x9, y9))
+'vmlogs/vm04'
+'vmlogs/vm05'
+'vmlogs/vm06'
+'vmlogs/vm07'
+'vmlogs/vm08'
+'vmlogs/vm09'
 
-# plt.plot(x1, y1, 'bo', x2, y2, 'ro')
-# plt.show()
+'local-vmlogs/dedup-1'
+'local-vmlogs/dedup-2'
+'local-vmlogs/dedup-4'
+'local-vmlogs/no-dedup-1'
+'local-vmlogs/no-dedup-2'
+'local-vmlogs/no-dedup-4'
