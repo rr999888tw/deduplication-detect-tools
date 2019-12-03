@@ -22,5 +22,5 @@ if __name__ == '__main__':
     except:
         print(dirname + ' creation error \n')
 
-    for i in range(100):
+    for i in range(500):
         generate_big_random_bin_file( dirname + "/data-32mb-" + str(i) + ".dat",1024 * 1024 * 32)

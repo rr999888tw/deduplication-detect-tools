@@ -60,7 +60,7 @@ if __name__ == '__main__':
     intervalRange = range(3, 300, 1)
     cmd_intervalRange = range(1, 60, 1)
     exp_time = 5*24*60*60 # experiment time
-    no_thread = 10
+    no_thread = 50
     
 
     def mythread():
